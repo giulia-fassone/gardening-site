@@ -282,7 +282,8 @@
     .carousel { display: none; }
     .grid { display: grid; }
     .lightbox { padding: 20px; }
-    .bottom-line { font-size: 10px; padding: 16px 14px 24px; }
+    .bottom-line { flex-direction: column; align-items: center; text-align: center; font-size: 10px; padding: 16px 14px 24px; }
+    .bottom-line .copyright, .bottom-line .disclaimer { text-align: center; }
   }
 </style>
 </head>
@@ -324,6 +325,14 @@
       <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
       <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
       <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+      <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
     </div>
     <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
   </div>
@@ -334,6 +343,14 @@
     <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
     <div class="grid-buttons">
       <button class="grid-btn" id="load-more">Load more</button>
     </div>
@@ -354,7 +371,7 @@
 
   <div class="bottom-line">
     <span class="copyright">© Juno Gardens 2026</span>
-    <span class="disclaimer">All photographs are original and taken by a human. Content may not be reproduced without permission.</span>
+    <span class="disclaimer">All photographs are original. Content may not be reproduced without permission.</span>
   </div>
 
   <script>
