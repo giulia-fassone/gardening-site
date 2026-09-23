@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Juno Gardens</title>
+
+<style>
+  @font-face {
+    font-family: 'TaylorGothic';
+    src: url('Taylor-Gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'IBMSelectric';
+    src: url('IBM-Selectric-Light-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'IBMSelectric';
+    src: url('IBM-Selectric-Light-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  html, body {
+    margin: 0; padding: 0; min-height: 100%;
+    background: transparent;
+  }
+
+  body {
+    font-family: 'IBMSelectric', serif;
+    color: #FFED00;
+    font-synthesis: none;
+  }
+
+  .bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; overflow: hidden;
+  }
+
+  .bg img {
+    position: absolute; top: 0; left: 0; width: 120%; height: 100%;
+    object-fit: cover;
+    animation: pan 60s linear infinite alternate;
+  }
+
+  @keyframes pan {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-16%); }
+  }
+
+  .overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(40, 30, 90, 0.35);
+    z-index: -1; pointer-events: none;
+  }
+
+  .menu-btn {
+    position: fixed; top: 24px; left: 24px;
+    font-size: 32px; color: #FFED00;
+    background: none; border: none; cursor: pointer;
+    line-height: 1; padding: 0;
+    font-family: 'IBMSelectric', serif; z-index: 20;
+  }
+
+  .menu-panel {
+    position: fixed; top: 0; left: 0; height: 100%; width: 240px;
+    background: rgba(20, 10, 60, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 30;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    padding: 60px 30px 30px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  .menu-panel.open { transform: translateX(0); }
+
+  .menu-panel a {
+    color: #FFED00; text-decoration: none;
+    font-family: 'IBMSelectric', serif;
+    font-size: 22px; font-weight: bold;
+    text-shadow: 1px 1px 2px #5B45E0;
+    letter-spacing: 0.5px;
+  }
+
+  .menu-scrim {
+    position: fixed; inset: 0; z-index: 25;
+    background: transparent; display: none;
+  }
+
+  .menu-scrim.open { display: block; }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 18vh 30px 60px; box-sizing: border-box;
+  }
+
+  .page h1 {
+    font-family: 'TaylorGothic', serif;
+    font-weight: normal; font-size: 72px;
+    margin: 0 0 40px; line-height: 1;
+    text-shadow: 2px 2px 2px #5B45E0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .service {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .service img, .service .placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background: rgba(40, 30, 90, 0.35);
+  }
+
+  .service .caption {
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #5B45E0;
+    text-align: center;
+  }
+
+  .footer {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
+    padding: 40px 20px 20px;
+    font-size: 22px;
+    text-shadow: 1px 1px 2px #5B45E0;
+  }
+
+  .footer a { color: #FFED00; text-decoration: none; }
+  .footer .insta { display: flex; align-items: center; gap: 10px; }
+  .footer svg { width: 26px; height: 26px; fill: #FFED00; filter: drop-shadow(1px 1px 1px #5B45E0); }
+
+  .bottom-line {
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 20px;
+    font-size: 12px;
+    padding: 20px 20px 30px;
+    text-shadow: 1px 1px 2px #5B45E0;
+    flex-wrap: wrap;
+  }
+
+  .bottom-line .copyright { text-align: left; }
+  .bottom-line .disclaimer { text-align: right; }
+
+  @media (max-width: 700px) {
+    .menu-btn { font-size: 28px; top: 18px; left: 18px; }
+    .menu-panel { width: 200px; padding: 50px 24px 24px; gap: 18px; }
+    .menu-panel a { font-size: 18px; }
+    .page { padding: 12vh 20px 40px; }
+    .page h1 { font-size: 44px; margin-bottom: 24px; }
+    .services-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .service .caption { font-size: 15px; }
+    .bg img { animation: none; width: 100%; }
+    .footer { font-size: 17px; padding: 30px 20px 20px; }
+    .bottom-line { flex-direction: column; align-items: center; text-align: center; font-size: 10px; padding: 16px 14px 24px; }
+    .bottom-line .copyright, .bottom-line .disclaimer { text-align: center; }
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="bg"><img src="background.jpg" alt=""></div>
+  <div class="overlay"></div>
+
+  <button class="menu-btn" id="menu-btn" aria-label="Menu">☰</button>
+  <div class="menu-scrim" id="menu-scrim"></div>
+  <nav class="menu-panel" id="menu-panel">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="page">
+    <h1>Services</h1>
+
+    <div class="services-grid">
+      <div class="service">
+        <img src="IMG_6888.jpg" alt="Bulb planting">
+        <div class="caption">Bulb planting</div>
+      </div>
+      <div class="service">
+        <img src="IMG_4976.jpg" alt="Regular or one-off maintenance">
+        <div class="caption">Regular or one-off maintenance</div>
+      </div>
+      <div class="service">
+        <div class="placeholder"></div>
+        <div class="caption">Irrigation systems</div>
+      </div>
+      <div class="service">
+        <img src="IMG_6880.jpg" alt="Border design">
+        <div class="caption">Border design</div>
+      </div>
+      <div class="service">
+        <img src="IMG_3600.jpg" alt="Lawn care">
+        <div class="caption">Lawn care</div>
+      </div>
+      <div class="service">
+        <div class="placeholder"></div>
+        <div class="caption">Mulching</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a id="footer-email" href="#"></a>
+    <a id="footer-phone" href="#"></a>
+    <a class="insta" href="https://instagram.com/juno.gardens" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 8.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+      @juno.gardens
+    </a>
+  </div>
+
+  <div class="bottom-line">
+    <span class="copyright">© Juno Gardens 2026</span>
+    <span class="disclaimer">All photographs are original. Content may not be reproduced without permission.</span>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menuPanel = document.getElementById('menu-panel');
+    const menuScrim = document.getElementById('menu-scrim');
+
+    function toggleMenu(open) {
+      menuPanel.classList.toggle('open', open);
+      menuScrim.classList.toggle('open', open);
+    }
+
+    menuBtn.addEventListener('click', () => toggleMenu(!menuPanel.classList.contains('open')));
+    menuScrim.addEventListener('click', () => toggleMenu(false));
+
+    (function () {
+      const emailUser = 'junogardens';
+      const emailDomain = 'gmail.com';
+      const phoneDigits = ['4','4','7','4','9','0','4','7','6','2','4','0'];
+      const emailEl = document.getElementById('footer-email');
+      const phoneEl = document.getElementById('footer-phone');
+      const email = emailUser + '@' + emailDomain;
+      const phone = '+' + phoneDigits.join('');
+      emailEl.textContent = email;
+      emailEl.href = 'mailto:' + email;
+      phoneEl.textContent = phone;
+      phoneEl.href = 'tel:' + phone;
+    })();
+  </script>
+
+</body>
+</html>
