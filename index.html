@@ -332,25 +332,21 @@
     filter: drop-shadow(1px 1px 1px #5B45E0);
   }
 
-  .disclaimer {
+  .bottom-line {
     position: relative;
     z-index: 1;
-    text-align: center;
-    font-size: 13px;
-    font-style: italic;
-    line-height: 1.6;
-    padding: 20px 20px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+    padding: 20px 20px 30px;
     text-shadow: 1px 1px 2px #5B45E0;
+    flex-wrap: wrap;
   }
 
-  .copyright {
-    position: relative;
-    z-index: 1;
-    text-align: left;
-    font-size: 12px;
-    padding: 4px 20px 30px;
-    text-shadow: 1px 1px 2px #5B45E0;
-  }
+  .bottom-line .copyright { text-align: left; }
+  .bottom-line .disclaimer { text-align: right; }
 
   @media (max-width: 700px) {
     .site-title { font-size: 56px; }
@@ -366,8 +362,7 @@
     .carousel { display: none; }
     .grid { display: grid; }
     .lightbox { padding: 20px; }
-    .disclaimer { font-size: 11px; padding: 16px 14px 6px; }
-    .copyright { font-size: 10px; padding: 4px 14px 24px; }
+    .bottom-line { font-size: 10px; padding: 16px 14px 24px; }
   }
 </style>
 </head>
@@ -437,13 +432,9 @@
     </a>
   </div>
 
-  <div class="disclaimer">
-    All photographs on this site were taken by a human.<br>
-    Content may not be reproduced without permission.
-  </div>
-
-  <div class="copyright">
-    © Juno Gardens 2026
+  <div class="bottom-line">
+    <span class="copyright">© Juno Gardens 2026</span>
+    <span class="disclaimer">All photographs are original and taken by a human :)</span>
   </div>
 
   <script>
