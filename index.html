@@ -98,11 +98,11 @@
     z-index: 30;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    padding: 80px 30px 30px;
+    padding: 60px 30px 30px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .menu-panel.open { transform: translateX(0); }
@@ -111,7 +111,7 @@
     color: #FFED00;
     text-decoration: none;
     font-family: 'IBMSelectric', serif;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     text-shadow: 1px 1px 2px #5B45E0;
     letter-spacing: 0.5px;
@@ -284,7 +284,7 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    background: rgba(20, 10, 60, 0.92);
+    background: rgba(20, 10, 60, 0.85);
     align-items: center;
     justify-content: center;
     padding: 40px;
@@ -306,28 +306,6 @@
     object-fit: contain;
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
     display: block;
-  }
-
-  .lightbox-close {
-    position: absolute;
-    top: -14px;
-    right: -14px;
-    width: 36px;
-    height: 36px;
-    font-size: 24px;
-    color: #FFED00;
-    background: rgba(20, 10, 60, 0.9);
-    border: 2px solid #FFED00;
-    border-radius: 50%;
-    cursor: pointer;
-    line-height: 1;
-    font-family: 'IBMSelectric', serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    text-shadow: 1px 1px 2px #5B45E0;
-    box-shadow: 1px 1px 3px #5B45E0;
   }
 
   /* --- Footer --- */
@@ -366,7 +344,7 @@
     .symbol { height: 48px; }
     .subtitle { font-size: 20px; margin-top: 18px; }
     .menu-btn { font-size: 28px; top: 18px; left: 18px; }
-    .menu-panel { width: 200px; padding: 70px 24px 24px; gap: 20px; }
+    .menu-panel { width: 200px; padding: 50px 24px 24px; gap: 18px; }
     .menu-panel a { font-size: 18px; }
     .hero { padding: 10vh 20px 30px; }
     .intro { font-size: 17px; margin-top: 4vh; }
@@ -374,8 +352,7 @@
     .footer { font-size: 17px; padding: 40px 20px 30px; }
     .carousel { display: none; }
     .grid { display: grid; }
-    .lightbox { padding: 30px 20px; }
-    .lightbox-close { width: 30px; height: 30px; font-size: 18px; top: -12px; right: -12px; }
+    .lightbox { padding: 20px; }
   }
 </style>
 </head>
@@ -433,10 +410,7 @@
   </div>
 
   <div class="lightbox" id="lightbox">
-    <div class="lightbox-inner">
-      <img id="lightbox-img" src="" alt="">
-      <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-    </div>
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <div class="footer">
@@ -526,10 +500,6 @@
     });
 
     lightbox.addEventListener('click', closeLightbox);
-    document.getElementById('lightbox-close').addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeLightbox();
-    });
   </script>
 
 </body>
