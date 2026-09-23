@@ -145,6 +145,7 @@
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
+  /* --- Desktop carousel --- */
   .carousel {
     position: relative;
     z-index: 1;
@@ -163,15 +164,18 @@
     overflow: hidden;
     width: 100%;
     transition: transform 0.5s ease;
+    align-items: center;
   }
 
   .carousel-track img {
-    flex: 0 0 calc((100% - 40px) / 5);
-    width: calc((100% - 40px) / 5);
-    aspect-ratio: 1 / 1;
+    height: 220px;
+    width: auto;
+    max-width: none;
     object-fit: cover;
     border-radius: 3px;
     box-shadow: 1px 1px 3px #5B45E0;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
   .carousel-btn {
@@ -185,6 +189,85 @@
     font-family: 'IBMSelectric', serif;
     text-shadow: 1px 1px 2px #5B45E0;
     flex-shrink: 0;
+  }
+
+  /* --- Mobile grid --- */
+  .grid {
+    display: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 10vh 16px 0;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #5B45E0;
+    cursor: pointer;
+    display: none;
+  }
+
+  .grid img.visible { display: block; }
+
+  .grid-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .grid-btn {
+    background: none;
+    border: 1px solid #FFED00;
+    color: #FFED00;
+    font-family: 'IBMSelectric', serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px #5B45E0;
+  }
+
+  /* --- Lightbox --- */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(20, 10, 60, 0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 40px;
+    color: #FFED00;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    font-family: 'IBMSelectric', serif;
   }
 
   .footer {
@@ -226,8 +309,8 @@
     .intro { font-size: 17px; margin-top: 8vh; }
     .bg img { animation: none; width: 100%; }
     .footer { font-size: 17px; padding: 40px 20px 30px; }
-    .carousel-btn { font-size: 30px; }
-    .carousel-track img { flex: 0 0 calc((100% - 20px) / 3); width: calc((100% - 20px) / 3); }
+    .carousel { display: none; }
+    .grid { display: grid; }
   }
 </style>
 </head>
@@ -266,6 +349,22 @@
     <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
   </div>
 
+  <div class="grid" id="grid">
+    <img src="IMG_1047.jpg" alt="" loading="lazy">
+    <img src="IMG_3875.jpg" alt="" loading="lazy">
+    <img src="IMG_3884.jpg" alt="" loading="lazy">
+    <img src="IMG_4804.jpg" alt="" loading="lazy">
+    <img src="IMG_4817.jpg" alt="" loading="lazy">
+    <div class="grid-buttons">
+      <button class="grid-btn" id="load-more">Load more</button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
   <div class="footer">
     <a class="insta" href="https://instagram.com/juno.gardens" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 8.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
@@ -275,20 +374,29 @@
   </div>
 
   <script>
+    /* Desktop carousel */
     const track = document.getElementById('track');
-    const imgs = track.querySelectorAll('img');
-    const perView = 5;
-    const gap = 10;
+    const carouselImgs = track.querySelectorAll('img');
     let index = 0;
+    const gap = 10;
+    const padding = 32;
+    const btnWidth = 60;
+
+    function visibleCount() {
+      return Math.max(1, Math.floor((window.innerWidth - padding - btnWidth * 2) / 230));
+    }
 
     function updateCarousel() {
-      const imgWidth = imgs[0].getBoundingClientRect().width;
-      const offset = index * (imgWidth + gap);
-      track.style.transform = `translateX(-${offset}px)`;
+      const perView = visibleCount();
+      const maxIndex = Math.max(0, carouselImgs.length - perView);
+      if (index > maxIndex) index = maxIndex;
+      const step = carouselImgs[0].getBoundingClientRect().width + gap;
+      track.style.transform = `translateX(-${index * step}px)`;
     }
 
     document.getElementById('next').addEventListener('click', () => {
-      const maxIndex = Math.max(0, imgs.length - perView);
+      const perView = visibleCount();
+      const maxIndex = Math.max(0, carouselImgs.length - perView);
       if (index < maxIndex) index++;
       updateCarousel();
     });
@@ -300,6 +408,54 @@
 
     window.addEventListener('resize', updateCarousel);
     window.addEventListener('load', updateCarousel);
+
+    /* Mobile grid with load-more */
+    const grid = document.getElementById('grid');
+    const gridImgs = Array.from(grid.querySelectorAll('img'));
+    const loadMoreBtn = document.getElementById('load-more');
+    const backTopBtn = document.createElement('button');
+    backTopBtn.className = 'grid-btn';
+    backTopBtn.textContent = 'Back to top';
+    let gridShown = 0;
+
+    function showGridBatch() {
+      const next = Math.min(gridShown + 4, gridImgs.length);
+      for (let i = gridShown; i < next; i++) gridImgs[i].classList.add('visible');
+      gridShown = next;
+
+      if (gridShown >= gridImgs.length) {
+        loadMoreBtn.replaceWith(backTopBtn);
+      }
+    }
+
+    loadMoreBtn.addEventListener('click', showGridBatch);
+    backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    if (window.innerWidth <= 700) showGridBatch();
+
+    /* Lightbox */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    document.querySelectorAll('.carousel-track img, .grid img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.src));
+    });
+
+    lightbox.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-close').addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeLightbox();
+    });
   </script>
 
 </body>
