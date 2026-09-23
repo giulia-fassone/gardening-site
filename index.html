@@ -87,13 +87,12 @@
   }
 
   .hero {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding: 15vh 20px 60px;
+    padding: 12vh 20px 40px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -136,7 +135,7 @@
   .intro {
     max-width: 700px;
     width: 100%;
-    margin: 12vh auto 0;
+    margin: 6vh auto 0;
     text-align: left;
     font-size: 24px;
     font-weight: bold;
@@ -145,14 +144,14 @@
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
-  /* --- Desktop carousel --- */
+  /* --- Desktop carousel: full natural ratios --- */
   .carousel {
     position: relative;
     z-index: 1;
     width: 100%;
-    margin: 10vh 0 0;
+    margin: 4vh 0 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     padding: 0 16px;
     box-sizing: border-box;
@@ -164,14 +163,15 @@
     overflow: hidden;
     width: 100%;
     transition: transform 0.5s ease;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .carousel-track img {
-    height: 220px;
+    height: auto;
+    max-height: 40vh;
     width: auto;
     max-width: none;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 3px;
     box-shadow: 1px 1px 3px #5B45E0;
     cursor: pointer;
@@ -189,6 +189,7 @@
     font-family: 'IBMSelectric', serif;
     text-shadow: 1px 1px 2px #5B45E0;
     flex-shrink: 0;
+    align-self: center;
   }
 
   /* --- Mobile grid --- */
@@ -197,7 +198,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 10vh 16px 0;
+    padding: 6vh 16px 0;
     box-sizing: border-box;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
@@ -305,8 +306,8 @@
     .symbol { height: 48px; }
     .subtitle { font-size: 20px; margin-top: 18px; }
     .menu-btn { font-size: 28px; top: 18px; left: 18px; }
-    .hero { padding: 12vh 20px 40px; }
-    .intro { font-size: 17px; margin-top: 8vh; }
+    .hero { padding: 10vh 20px 30px; }
+    .intro { font-size: 17px; margin-top: 4vh; }
     .bg img { animation: none; width: 100%; }
     .footer { font-size: 17px; padding: 40px 20px 30px; }
     .carousel { display: none; }
@@ -379,25 +380,19 @@
     const carouselImgs = track.querySelectorAll('img');
     let index = 0;
     const gap = 10;
-    const padding = 32;
-    const btnWidth = 60;
-
-    function visibleCount() {
-      return Math.max(1, Math.floor((window.innerWidth - padding - btnWidth * 2) / 230));
-    }
 
     function updateCarousel() {
-      const perView = visibleCount();
-      const maxIndex = Math.max(0, carouselImgs.length - perView);
-      if (index > maxIndex) index = maxIndex;
+      if (!carouselImgs.length) return;
       const step = carouselImgs[0].getBoundingClientRect().width + gap;
       track.style.transform = `translateX(-${index * step}px)`;
     }
 
     document.getElementById('next').addEventListener('click', () => {
-      const perView = visibleCount();
-      const maxIndex = Math.max(0, carouselImgs.length - perView);
-      if (index < maxIndex) index++;
+      const trackWidth = track.parentElement.clientWidth;
+      const totalWidth = Array.from(carouselImgs).reduce((sum, img) => sum + img.getBoundingClientRect().width + gap, 0);
+      const maxOffset = Math.max(0, totalWidth - trackWidth);
+      const step = carouselImgs[0].getBoundingClientRect().width + gap;
+      if (index * step < maxOffset) index++;
       updateCarousel();
     });
 
@@ -422,10 +417,7 @@
       const next = Math.min(gridShown + 4, gridImgs.length);
       for (let i = gridShown; i < next; i++) gridImgs[i].classList.add('visible');
       gridShown = next;
-
-      if (gridShown >= gridImgs.length) {
-        loadMoreBtn.replaceWith(backTopBtn);
-      }
+      if (gridShown >= gridImgs.length) loadMoreBtn.replaceWith(backTopBtn);
     }
 
     loadMoreBtn.addEventListener('click', showGridBatch);
