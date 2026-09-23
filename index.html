@@ -32,6 +32,7 @@
 
   body {
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     color: #FFED00;
     font-synthesis: none;
   }
@@ -63,7 +64,9 @@
     font-size: 32px; color: #FFED00;
     background: none; border: none; cursor: pointer;
     line-height: 1; padding: 0;
-    font-family: 'IBMSelectric', serif; z-index: 20;
+    font-family: 'IBMSelectric', serif;
+    font-style: italic;
+    z-index: 20;
   }
 
   .menu-panel {
@@ -83,6 +86,7 @@
   .menu-panel a {
     color: #FFED00; text-decoration: none;
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     font-size: 22px; font-weight: bold;
     text-shadow: 1px 1px 2px #5B45E0;
     letter-spacing: 0.5px;
@@ -111,6 +115,7 @@
 
   .site-title {
     font-family: 'TaylorGothic', serif;
+    font-style: normal;
     font-weight: normal; font-size: 100px;
     margin: 0; line-height: 1; letter-spacing: 2px;
     font-synthesis: none;
@@ -131,6 +136,7 @@
     margin: 6vh auto 0; text-align: left;
     font-size: 24px; font-weight: bold;
     line-height: 1.6; letter-spacing: 0.5px;
+    font-style: italic;
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
@@ -175,6 +181,7 @@
     cursor: pointer; padding: 8px;
     line-height: 1;
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     text-shadow: 1px 1px 2px #5B45E0;
     flex-shrink: 0;
   }
@@ -216,6 +223,7 @@
     background: none; border: 1px solid #FFED00;
     color: #FFED00;
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     font-size: 16px; font-weight: bold;
     padding: 10px 20px; border-radius: 20px;
     cursor: pointer;
@@ -245,6 +253,7 @@
     align-items: center; gap: 12px;
     padding: 60px 20px 20px;
     font-size: 22px;
+    font-style: italic;
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
@@ -257,6 +266,7 @@
     display: flex; justify-content: space-between;
     align-items: center; gap: 20px;
     font-size: 12px;
+    font-style: italic;
     padding: 20px 20px 30px;
     text-shadow: 1px 1px 2px #5B45E0;
     flex-wrap: wrap;
@@ -407,30 +417,46 @@
     const nextBtn = document.getElementById('next');
     let index = 0;
 
+    function itemWidth(i) {
+      return items[i].getBoundingClientRect().width;
+    }
+
     function itemStep() {
       if (!items.length) return 0;
-      const rect = items[0].getBoundingClientRect();
       const gap = parseFloat(getComputedStyle(track).gap) || 0;
-      return rect.width + gap;
+      return itemWidth(0) + gap;
     }
 
     function maxIndex() {
       const viewport = track.parentElement.clientWidth;
-      const step = itemStep();
-      if (!step) return 0;
       const gap = parseFloat(getComputedStyle(track).gap) || 0;
-      let total = 0;
-      items.forEach(i => { total += i.getBoundingClientRect().width; });
-      total += (items.length - 1) * gap;
-      const visible = Math.floor((viewport + gap) / step);
-      return Math.max(0, items.length - visible);
+      let totalWidth = 0;
+      items.forEach((_, i) => { totalWidth += itemWidth(i) + gap; });
+      totalWidth -= gap;
+
+      if (totalWidth <= viewport) return 0;
+
+      let consumed = 0;
+      let idx = 0;
+      for (let i = 0; i < items.length; i++) {
+        const w = itemWidth(i) + gap;
+        if (consumed + w > viewport - 1) break;
+        consumed += w;
+        idx = i + 1;
+      }
+      const step = itemStep();
+      const remaining = totalWidth - viewport;
+      const rawSteps = Math.ceil(remaining / step);
+      return Math.max(idx, rawSteps);
     }
 
     function update() {
       const step = itemStep();
+      const max = maxIndex();
+      if (index > max) index = max;
       track.style.transform = `translateX(-${index * step}px)`;
       prevBtn.disabled = index <= 0;
-      nextBtn.disabled = index >= maxIndex();
+      nextBtn.disabled = index >= max;
     }
 
     nextBtn.addEventListener('click', () => {
