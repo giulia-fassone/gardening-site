@@ -121,10 +121,6 @@
     margin: 0 0 22px;
   }
 
-  .about-photo {
-    margin-top: 0;
-  }
-
   .about-photo img {
     width: 100%; height: auto; display: block;
   }
@@ -189,11 +185,11 @@
   </nav>
 
   <div class="page">
-    <h1>Juno is</h1>
+    <h1>Juno is...</h1>
 
     <div class="about-grid">
       <div class="about-text">
-        <p>a boutique, woman-owned garden design studio founded by Giulia Fassone — a qualified horticulturalist, garden designer and artist.</p>
+        <p>A boutique, woman-owned garden design studio founded by Giulia Fassone — a qualified horticulturalist, garden designer and artist.</p>
         <p>We design gardens that adapt to a changing climate and bring joy throughout the year, working with wildlife-friendly specimens and reclaimed materials wherever we can.</p>
         <p>We bring creativity, originality and professionalism to every project — and above all, we pride ourselves on listening carefully to the needs of our clients. We would love to create and maintain your piece of Paradise on Earth.</p>
       </div>
@@ -211,4 +207,40 @@
       <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 8.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
       @juno.gardens
     </a>
- 
+  </div>
+
+  <div class="bottom-line">
+    <span class="copyright">© Juno Gardens 2026</span>
+    <span class="disclaimer">All photographs are original and taken by a human. Content may not be reproduced without permission.</span>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menuPanel = document.getElementById('menu-panel');
+    const menuScrim = document.getElementById('menu-scrim');
+
+    function toggleMenu(open) {
+      menuPanel.classList.toggle('open', open);
+      menuScrim.classList.toggle('open', open);
+    }
+
+    menuBtn.addEventListener('click', () => toggleMenu(!menuPanel.classList.contains('open')));
+    menuScrim.addEventListener('click', () => toggleMenu(false));
+
+    (function () {
+      const emailUser = 'junogardens';
+      const emailDomain = 'gmail.com';
+      const phoneDigits = ['4','4','7','4','9','0','4','7','6','2','4','0'];
+      const emailEl = document.getElementById('footer-email');
+      const phoneEl = document.getElementById('footer-phone');
+      const email = emailUser + '@' + emailDomain;
+      const phone = '+' + phoneDigits.join('');
+      emailEl.textContent = email;
+      emailEl.href = 'mailto:' + email;
+      phoneEl.textContent = phone;
+      phoneEl.href = 'tel:' + phone;
+    })();
+  </script>
+
+</body>
+</html>
