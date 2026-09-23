@@ -145,6 +145,57 @@
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
+  .carousel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 10vh auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: rgba(40, 30, 90, 0.25);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .carousel-track img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .carousel-track img.active {
+    opacity: 1;
+  }
+
+  .carousel-btn {
+    background: none;
+    border: none;
+    color: #FFED00;
+    font-size: 44px;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    font-family: 'IBMSelectric', serif;
+    text-shadow: 1px 1px 2px #5B45E0;
+    flex-shrink: 0;
+  }
+
   .footer {
     position: relative;
     z-index: 1;
@@ -184,6 +235,8 @@
     .intro { font-size: 17px; margin-top: 8vh; }
     .bg img { animation: none; width: 100%; }
     .footer { font-size: 17px; padding: 40px 20px 30px; }
+    .carousel-btn { font-size: 30px; }
+    .carousel { gap: 6px; padding: 0 10px; }
   }
 </style>
 </head>
@@ -210,6 +263,18 @@
     </p>
   </div>
 
+  <div class="carousel">
+    <button class="carousel-btn" id="prev" aria-label="Previous">&#8249;</button>
+    <div class="carousel-track" id="track">
+      <img src="IMG_1047.jpg" alt="" loading="lazy">
+      <img src="IMG_3875.jpg" alt="" loading="lazy">
+      <img src="IMG_3884.jpg" alt="" loading="lazy">
+      <img src="IMG_4804.jpg" alt="" loading="lazy">
+      <img src="IMG_4817.jpg" alt="" loading="lazy">
+    </div>
+    <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
+  </div>
+
   <div class="footer">
     <a class="insta" href="https://instagram.com/juno.gardens" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 8.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4zm6.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
@@ -217,6 +282,24 @@
     </a>
     <a href="mailto:junogardens@gmail.com">junogardens@gmail.com</a>
   </div>
+
+  <script>
+    const imgs = document.querySelectorAll('.carousel-track img');
+    let current = 0;
+    imgs[current].classList.add('active');
+
+    document.getElementById('next').addEventListener('click', () => {
+      imgs[current].classList.remove('active');
+      current = (current + 1) % imgs.length;
+      imgs[current].classList.add('active');
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      imgs[current].classList.remove('active');
+      current = (current - 1 + imgs.length) % imgs.length;
+      imgs[current].classList.add('active');
+    });
+  </script>
 
 </body>
 </html>
