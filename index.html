@@ -141,14 +141,10 @@
     gap: 12px; padding: 0 16px; box-sizing: border-box;
   }
 
-  .carousel-viewport {
-    flex: 1;
-    overflow: hidden;
-  }
+  .carousel-viewport { flex: 1; overflow: hidden; }
 
   .carousel-track {
-    display: flex;
-    gap: 18px;
+    display: flex; gap: 18px;
     transition: transform 0.5s ease;
     will-change: transform;
   }
@@ -162,18 +158,15 @@
 
   .carousel-track .img-wrap::after {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: rgba(40, 30, 90, 0.15);
     pointer-events: none;
   }
 
   .carousel-track img {
-    height: 100%;
-    width: auto;
+    height: 100%; width: auto;
     object-fit: contain;
-    cursor: pointer;
-    display: block;
+    cursor: pointer; display: block;
   }
 
   .carousel-btn {
@@ -196,17 +189,14 @@
   }
 
   .grid .img-wrap {
-    position: relative;
-    line-height: 0;
-    display: none;
+    position: relative; line-height: 0; display: none;
   }
 
   .grid .img-wrap.visible { display: block; }
 
   .grid .img-wrap::after {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: rgba(40, 30, 90, 0.15);
     pointer-events: none;
   }
@@ -214,8 +204,7 @@
   .grid img {
     width: 100%; aspect-ratio: 1 / 1;
     object-fit: cover;
-    cursor: pointer;
-    display: block;
+    cursor: pointer; display: block;
   }
 
   .grid-buttons {
@@ -298,10 +287,7 @@
 
 <body>
 
-  <div class="bg">
-    <img src="background.jpg" alt="">
-  </div>
-
+  <div class="bg"><img src="background.jpg" alt=""></div>
   <div class="overlay"></div>
 
   <button class="menu-btn" id="menu-btn" aria-label="Menu">☰</button>
@@ -309,7 +295,6 @@
   <nav class="menu-panel" id="menu-panel">
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
-    <a href="sketchbook.html">Sketchbook</a>
     <a href="contact.html">Contact</a>
   </nav>
 
@@ -319,7 +304,6 @@
       <img src="Dumpling-Venus-Symbol-Yellow.png" alt="Juno Gardens symbol" class="symbol">
     </div>
     <p class="subtitle">Sustainable Garden Design &amp; Maintenance</p>
-
     <p class="intro">
       Lovable &amp; Edible. South East London based gardening services. Focussing on resilient, sustainable &amp; beautiful plants for luscious urban gardens.
     </p>
@@ -331,17 +315,27 @@
       <div class="carousel-track" id="track">
         <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_3600.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4976.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_5790.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6880.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6888.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6940.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_8349.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4040.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_8463.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="resting.jpg" alt="" loading="lazy"></div>
       </div>
     </div>
     <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
@@ -350,17 +344,27 @@
   <div class="grid" id="grid">
     <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_3600.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_4976.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_5790.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6880.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6888.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6940.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_8349.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_4040.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_8463.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="resting.jpg" alt="" loading="lazy"></div>
     <div class="grid-buttons">
       <button class="grid-btn" id="load-more">Load more</button>
     </div>
