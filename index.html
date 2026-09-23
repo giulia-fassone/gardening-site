@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Juno Gardens</title>
+<title>Juno Gardens</title>
 
 <style>
   @font-face {
@@ -26,9 +26,7 @@
   }
 
   html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
+    margin: 0; padding: 0; min-height: 100%;
     background: transparent;
   }
 
@@ -39,19 +37,12 @@
   }
 
   .bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    overflow: hidden;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2; overflow: hidden;
   }
 
   .bg img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 120%;
-    height: 100%;
+    position: absolute; top: 0; left: 0; width: 120%; height: 100%;
     object-fit: cover;
     animation: pan 60s linear infinite alternate;
   }
@@ -62,36 +53,21 @@
   }
 
   .overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(40, 30, 90, 0.35);
-    z-index: -1;
-    pointer-events: none;
+    z-index: -1; pointer-events: none;
   }
 
   .menu-btn {
-    position: fixed;
-    top: 24px;
-    left: 24px;
-    font-size: 32px;
-    color: #FFED00;
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    font-family: 'IBMSelectric', serif;
-    z-index: 20;
+    position: fixed; top: 24px; left: 24px;
+    font-size: 32px; color: #FFED00;
+    background: none; border: none; cursor: pointer;
+    line-height: 1; padding: 0;
+    font-family: 'IBMSelectric', serif; z-index: 20;
   }
 
   .menu-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 240px;
+    position: fixed; top: 0; left: 0; height: 100%; width: 240px;
     background: rgba(20, 10, 60, 0.85);
     backdrop-filter: blur(4px);
     z-index: 30;
@@ -99,82 +75,151 @@
     transition: transform 0.3s ease;
     padding: 60px 30px 30px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: flex; flex-direction: column; gap: 20px;
   }
 
   .menu-panel.open { transform: translateX(0); }
 
   .menu-panel a {
-    color: #FFED00;
-    text-decoration: none;
+    color: #FFED00; text-decoration: none;
     font-family: 'IBMSelectric', serif;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 22px; font-weight: bold;
     text-shadow: 1px 1px 2px #5B45E0;
     letter-spacing: 0.5px;
   }
 
   .menu-scrim {
-    position: fixed;
-    inset: 0;
-    z-index: 25;
-    background: transparent;
-    display: none;
+    position: fixed; inset: 0; z-index: 25;
+    background: transparent; display: none;
   }
 
   .menu-scrim.open { display: block; }
 
-  .page {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 18vh 30px 60px;
+  .hero {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start;
+    text-align: center;
+    padding: 12vh 20px 40px;
     box-sizing: border-box;
+    position: relative; z-index: 1;
   }
 
-  .page h1 {
+  .title-row {
+    display: flex; align-items: center;
+    justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+
+  .site-title {
     font-family: 'TaylorGothic', serif;
-    font-weight: normal;
-    font-size: 72px;
-    margin: 0 0 50px;
-    line-height: 1;
+    font-weight: normal; font-size: 100px;
+    margin: 0; line-height: 1; letter-spacing: 2px;
+    font-synthesis: none;
     text-shadow: 2px 2px 2px #5B45E0;
   }
 
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 50px;
+  .symbol { height: 84px; width: auto; display: block; }
+
+  .subtitle {
+    font-size: 32px; font-weight: bold;
+    margin-top: 28px; letter-spacing: 1px;
+    font-style: italic;
+    text-shadow: 1px 1px 2px #5B45E0;
+  }
+
+  .intro {
+    max-width: 700px; width: 100%;
+    margin: 6vh auto 0; text-align: left;
+    font-size: 24px; font-weight: bold;
+    line-height: 1.6; letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px #5B45E0;
+  }
+
+  .carousel {
+    position: relative; z-index: 1;
+    width: 100%; margin: 4vh 0 0;
+    display: flex; align-items: flex-start;
+    gap: 10px; padding: 0 16px; box-sizing: border-box;
+  }
+
+  .carousel-track {
+    display: flex; gap: 10px;
+    overflow: hidden; width: 100%;
+    transition: transform 0.5s ease;
     align-items: flex-start;
   }
 
-  .about-text p {
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.7;
-    text-shadow: 1px 1px 2px #5B45E0;
-    margin: 0 0 22px;
+  .carousel-track img {
+    height: auto; max-height: 40vh;
+    width: auto; max-width: none;
+    object-fit: contain;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px #5B45E0;
+    cursor: pointer; flex-shrink: 0;
   }
 
-  .about-photo img {
-    width: 100%;
-    height: auto;
+  .carousel-btn {
+    background: none; border: none;
+    color: #FFED00; font-size: 44px;
+    cursor: pointer; padding: 8px;
+    line-height: 1;
+    font-family: 'IBMSelectric', serif;
+    text-shadow: 1px 1px 2px #5B45E0;
+    flex-shrink: 0; align-self: center;
+  }
+
+  .grid {
+    display: none; position: relative; z-index: 1;
+    width: 100%; padding: 6vh 16px 0;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+
+  .grid img {
+    width: 100%; aspect-ratio: 1 / 1;
+    object-fit: cover; border-radius: 3px;
+    box-shadow: 1px 1px 3px #5B45E0;
+    cursor: pointer; display: none;
+  }
+
+  .grid img.visible { display: block; }
+
+  .grid-buttons {
+    grid-column: 1 / -1; display: flex;
+    justify-content: center; margin-top: 16px;
+  }
+
+  .grid-btn {
+    background: none; border: 1px solid #FFED00;
+    color: #FFED00;
+    font-family: 'IBMSelectric', serif;
+    font-size: 16px; font-weight: bold;
+    padding: 10px 20px; border-radius: 20px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px #5B45E0;
+  }
+
+  .lightbox {
+    display: none; position: fixed; inset: 0;
+    z-index: 100;
+    background: rgba(20, 10, 60, 0.85);
+    align-items: center; justify-content: center;
+    padding: 40px; box-sizing: border-box;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 100%; max-height: 88vh;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
     display: block;
-    border-radius: 3px;
-    box-shadow: 2px 2px 6px #5B45E0;
   }
 
   .footer {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 40px 20px 20px;
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 12px;
+    padding: 60px 20px 20px;
     font-size: 22px;
     text-shadow: 1px 1px 2px #5B45E0;
   }
@@ -184,12 +229,9 @@
   .footer svg { width: 26px; height: 26px; fill: #FFED00; filter: drop-shadow(1px 1px 1px #5B45E0); }
 
   .bottom-line {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 20px;
     font-size: 12px;
     padding: 20px 20px 30px;
     text-shadow: 1px 1px 2px #5B45E0;
@@ -200,15 +242,19 @@
   .bottom-line .disclaimer { text-align: right; }
 
   @media (max-width: 700px) {
+    .site-title { font-size: 56px; }
+    .symbol { height: 48px; }
+    .subtitle { font-size: 20px; margin-top: 18px; }
     .menu-btn { font-size: 28px; top: 18px; left: 18px; }
     .menu-panel { width: 200px; padding: 50px 24px 24px; gap: 18px; }
     .menu-panel a { font-size: 18px; }
-    .page { padding: 12vh 20px 40px; }
-    .page h1 { font-size: 44px; margin-bottom: 30px; }
-    .about-grid { grid-template-columns: 1fr; gap: 30px; }
-    .about-text p { font-size: 17px; }
+    .hero { padding: 10vh 20px 30px; }
+    .intro { font-size: 17px; margin-top: 4vh; }
     .bg img { animation: none; width: 100%; }
-    .footer { font-size: 17px; padding: 30px 20px 20px; }
+    .footer { font-size: 17px; padding: 40px 20px 20px; }
+    .carousel { display: none; }
+    .grid { display: grid; }
+    .lightbox { padding: 20px; }
     .bottom-line { font-size: 10px; padding: 16px 14px 24px; }
   }
 </style>
@@ -225,27 +271,49 @@
   <button class="menu-btn" id="menu-btn" aria-label="Menu">☰</button>
   <div class="menu-scrim" id="menu-scrim"></div>
   <nav class="menu-panel" id="menu-panel">
-    <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="sketchbook.html">Sketchbook</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-  <div class="page">
-    <h1>Juno Gardens</h1>
-
-    <div class="about-grid">
-      <div class="about-text">
-        <p>I am an artist and a qualified horticulturalist and garden designer. Juno Gardens is a small, woman-owned business, and everything we make comes from a genuine love of plants and the people who live among them.</p>
-        <p>We design gardens that adapt to a changing climate and bring joy throughout the year, using wildlife-friendly specimens and reclaimed materials wherever we can.</p>
-        <p>We bring tasteful design and professionalism to every project — and above all, we pride ourselves on listening carefully to the needs of our clients.</p>
-      </div>
-
-      <div class="about-photo">
-        <img src="portrait.jpg" alt="Giulia Fassone">
-      </div>
+  <div class="hero">
+    <div class="title-row">
+      <h1 class="site-title">Juno Gardens</h1>
+      <img src="Dumpling-Venus-Symbol-Yellow.png" alt="Juno Gardens symbol" class="symbol">
     </div>
+    <p class="subtitle">Sustainable Garden Design &amp; Maintenance</p>
+
+    <p class="intro">
+      Lovable &amp; Edible. South East London based gardening services. Focussing on resilient, sustainable &amp; beautiful plants for luscious urban gardens.
+    </p>
+  </div>
+
+  <div class="carousel">
+    <button class="carousel-btn" id="prev" aria-label="Previous">&#8249;</button>
+    <div class="carousel-track" id="track">
+      <img src="IMG_1047.jpg" alt="" loading="lazy">
+      <img src="IMG_3875.jpg" alt="" loading="lazy">
+      <img src="IMG_3884.jpg" alt="" loading="lazy">
+      <img src="IMG_4804.jpg" alt="" loading="lazy">
+      <img src="IMG_4817.jpg" alt="" loading="lazy">
+    </div>
+    <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <img src="IMG_1047.jpg" alt="" loading="lazy">
+    <img src="IMG_3875.jpg" alt="" loading="lazy">
+    <img src="IMG_3884.jpg" alt="" loading="lazy">
+    <img src="IMG_4804.jpg" alt="" loading="lazy">
+    <img src="IMG_4817.jpg" alt="" loading="lazy">
+    <div class="grid-buttons">
+      <button class="grid-btn" id="load-more">Load more</button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <div class="footer">
@@ -259,7 +327,7 @@
 
   <div class="bottom-line">
     <span class="copyright">© Juno Gardens 2026</span>
-    <span class="disclaimer">All photographs are original and taken by a human :)</span>
+    <span class="disclaimer">All photographs are original and taken by a human. Content may not be reproduced without permission.</span>
   </div>
 
   <script>
@@ -274,6 +342,73 @@
 
     menuBtn.addEventListener('click', () => toggleMenu(!menuPanel.classList.contains('open')));
     menuScrim.addEventListener('click', () => toggleMenu(false));
+
+    const track = document.getElementById('track');
+    const carouselImgs = track.querySelectorAll('img');
+    let index = 0;
+    const gap = 10;
+
+    function updateCarousel() {
+      if (!carouselImgs.length) return;
+      const step = carouselImgs[0].getBoundingClientRect().width + gap;
+      track.style.transform = `translateX(-${index * step}px)`;
+    }
+
+    document.getElementById('next').addEventListener('click', () => {
+      const trackWidth = track.parentElement.clientWidth;
+      const totalWidth = Array.from(carouselImgs).reduce((sum, img) => sum + img.getBoundingClientRect().width + gap, 0);
+      const maxOffset = Math.max(0, totalWidth - trackWidth);
+      const step = carouselImgs[0].getBoundingClientRect().width + gap;
+      if (index * step < maxOffset) index++;
+      updateCarousel();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      if (index > 0) index--;
+      updateCarousel();
+    });
+
+    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('load', updateCarousel);
+
+    const grid = document.getElementById('grid');
+    const gridImgs = Array.from(grid.querySelectorAll('img'));
+    const loadMoreBtn = document.getElementById('load-more');
+    const backTopBtn = document.createElement('button');
+    backTopBtn.className = 'grid-btn';
+    backTopBtn.textContent = 'Back to top';
+    let gridShown = 0;
+
+    function showGridBatch() {
+      const next = Math.min(gridShown + 4, gridImgs.length);
+      for (let i = gridShown; i < next; i++) gridImgs[i].classList.add('visible');
+      gridShown = next;
+      if (gridShown >= gridImgs.length) loadMoreBtn.replaceWith(backTopBtn);
+    }
+
+    loadMoreBtn.addEventListener('click', showGridBatch);
+    backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    if (window.innerWidth <= 700) showGridBatch();
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    document.querySelectorAll('.carousel-track img, .grid img').forEach(img => {
+      img.addEventListener('click', () => openLightbox(img.src));
+    });
+
+    lightbox.addEventListener('click', closeLightbox);
 
     (function () {
       const emailUser = 'junogardens';
