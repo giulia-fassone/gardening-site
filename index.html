@@ -134,23 +134,30 @@
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
+  /* --- Carousel (rewritten) --- */
   .carousel {
     position: relative; z-index: 1;
     width: 100%; margin: 4vh 0 0;
-    display: flex; align-items: flex-start;
+    display: flex; align-items: center;
     gap: 12px; padding: 0 16px; box-sizing: border-box;
   }
 
+  .carousel-viewport {
+    flex: 1;
+    overflow: hidden;
+  }
+
   .carousel-track {
-    display: flex; gap: 18px;
-    overflow: hidden; width: 100%;
+    display: flex;
+    gap: 18px;
     transition: transform 0.5s ease;
-    align-items: flex-start;
+    will-change: transform;
   }
 
   .carousel-track .img-wrap {
     position: relative;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    height: 40vh;
     line-height: 0;
   }
 
@@ -163,8 +170,8 @@
   }
 
   .carousel-track img {
-    height: auto; max-height: 40vh;
-    width: auto; max-width: none;
+    height: 100%;
+    width: auto;
     object-fit: contain;
     cursor: pointer;
     display: block;
@@ -177,8 +184,10 @@
     line-height: 1;
     font-family: 'IBMSelectric', serif;
     text-shadow: 1px 1px 2px #5B45E0;
-    flex-shrink: 0; align-self: center;
+    flex-shrink: 0;
   }
+
+  .carousel-btn:disabled { opacity: 0.3; cursor: default; }
 
   .grid {
     display: none; position: relative; z-index: 1;
@@ -319,20 +328,22 @@
 
   <div class="carousel">
     <button class="carousel-btn" id="prev" aria-label="Previous">&#8249;</button>
-    <div class="carousel-track" id="track">
-      <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
-      <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="track">
+        <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
+      </div>
     </div>
     <button class="carousel-btn" id="next" aria-label="Next">&#8250;</button>
   </div>
@@ -387,34 +398,52 @@
     menuBtn.addEventListener('click', () => toggleMenu(!menuPanel.classList.contains('open')));
     menuScrim.addEventListener('click', () => toggleMenu(false));
 
+    /* --- Carousel --- */
     const track = document.getElementById('track');
-    const carouselImgs = track.querySelectorAll('img');
+    const items = track.querySelectorAll('.img-wrap');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
     let index = 0;
-    const gap = 18;
 
-    function updateCarousel() {
-      if (!carouselImgs.length) return;
-      const step = carouselImgs[0].getBoundingClientRect().width + gap;
-      track.style.transform = `translateX(-${index * step}px)`;
+    function itemStep() {
+      if (!items.length) return 0;
+      const rect = items[0].getBoundingClientRect();
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return rect.width + gap;
     }
 
-    document.getElementById('next').addEventListener('click', () => {
-      const trackWidth = track.parentElement.clientWidth;
-      const totalWidth = Array.from(carouselImgs).reduce((sum, img) => sum + img.getBoundingClientRect().width + gap, 0);
-      const maxOffset = Math.max(0, totalWidth - trackWidth);
-      const step = carouselImgs[0].getBoundingClientRect().width + gap;
-      if (index * step < maxOffset) index++;
-      updateCarousel();
+    function maxIndex() {
+      const viewport = track.parentElement.clientWidth;
+      const step = itemStep();
+      if (!step) return 0;
+      let total = 0;
+      items.forEach(i => { total += i.getBoundingClientRect().width; });
+      total += (items.length - 1) * (parseFloat(getComputedStyle(track).gap) || 0);
+      const visible = Math.floor((viewport + (parseFloat(getComputedStyle(track).gap) || 0)) / step);
+      return Math.max(0, items.length - visible);
+    }
+
+    function update() {
+      const step = itemStep();
+      track.style.transform = `translateX(-${index * step}px)`;
+      prevBtn.disabled = index <= 0;
+      nextBtn.disabled = index >= maxIndex();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index = Math.min(index + 1, maxIndex());
+      update();
     });
 
-    document.getElementById('prev').addEventListener('click', () => {
-      if (index > 0) index--;
-      updateCarousel();
+    prevBtn.addEventListener('click', () => {
+      index = Math.max(index - 1, 0);
+      update();
     });
 
-    window.addEventListener('resize', updateCarousel);
-    window.addEventListener('load', updateCarousel);
+    window.addEventListener('resize', () => { index = 0; update(); });
+    window.addEventListener('load', update);
 
+    /* --- Mobile grid --- */
     const grid = document.getElementById('grid');
     const gridImgs = Array.from(grid.querySelectorAll('.img-wrap'));
     const loadMoreBtn = document.getElementById('load-more');
@@ -435,6 +464,7 @@
 
     if (window.innerWidth <= 700) showGridBatch();
 
+    /* --- Lightbox --- */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
@@ -454,6 +484,7 @@
 
     lightbox.addEventListener('click', closeLightbox);
 
+    /* --- Contact info --- */
     (function () {
       const emailUser = 'junogardens';
       const emailDomain = 'gmail.com';
