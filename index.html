@@ -134,7 +134,6 @@
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
-  /* --- Carousel (rewritten) --- */
   .carousel {
     position: relative; z-index: 1;
     width: 100%; margin: 4vh 0 0;
@@ -331,17 +330,17 @@
     <div class="carousel-viewport">
       <div class="carousel-track" id="track">
         <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
-        <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+        <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
         <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
       </div>
     </div>
@@ -350,17 +349,17 @@
 
   <div class="grid" id="grid">
     <div class="img-wrap"><img src="IMG_1047.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6666.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_3875.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6874.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_3884.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_6879.jpg" alt="" loading="lazy"></div>
-    <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_4804.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8346.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_4817.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8526.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6671.jpg" alt="" loading="lazy"></div>
+    <div class="img-wrap"><img src="IMG_6892.jpg" alt="" loading="lazy"></div>
     <div class="img-wrap"><img src="IMG_8581.jpg" alt="" loading="lazy"></div>
     <div class="grid-buttons">
       <button class="grid-btn" id="load-more">Load more</button>
@@ -398,7 +397,6 @@
     menuBtn.addEventListener('click', () => toggleMenu(!menuPanel.classList.contains('open')));
     menuScrim.addEventListener('click', () => toggleMenu(false));
 
-    /* --- Carousel --- */
     const track = document.getElementById('track');
     const items = track.querySelectorAll('.img-wrap');
     const prevBtn = document.getElementById('prev');
@@ -416,10 +414,11 @@
       const viewport = track.parentElement.clientWidth;
       const step = itemStep();
       if (!step) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
       let total = 0;
       items.forEach(i => { total += i.getBoundingClientRect().width; });
-      total += (items.length - 1) * (parseFloat(getComputedStyle(track).gap) || 0);
-      const visible = Math.floor((viewport + (parseFloat(getComputedStyle(track).gap) || 0)) / step);
+      total += (items.length - 1) * gap;
+      const visible = Math.floor((viewport + gap) / step);
       return Math.max(0, items.length - visible);
     }
 
@@ -443,7 +442,6 @@
     window.addEventListener('resize', () => { index = 0; update(); });
     window.addEventListener('load', update);
 
-    /* --- Mobile grid --- */
     const grid = document.getElementById('grid');
     const gridImgs = Array.from(grid.querySelectorAll('.img-wrap'));
     const loadMoreBtn = document.getElementById('load-more');
@@ -464,7 +462,6 @@
 
     if (window.innerWidth <= 700) showGridBatch();
 
-    /* --- Lightbox --- */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
@@ -484,7 +481,6 @@
 
     lightbox.addEventListener('click', closeLightbox);
 
-    /* --- Contact info --- */
     (function () {
       const emailUser = 'junogardens';
       const emailDomain = 'gmail.com';
