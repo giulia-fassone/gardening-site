@@ -32,6 +32,7 @@
 
   body {
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     color: #FFED00;
     font-synthesis: none;
   }
@@ -63,7 +64,9 @@
     font-size: 32px; color: #FFED00;
     background: none; border: none; cursor: pointer;
     line-height: 1; padding: 0;
-    font-family: 'IBMSelectric', serif; z-index: 20;
+    font-family: 'IBMSelectric', serif;
+    font-style: italic;
+    z-index: 20;
   }
 
   .menu-panel {
@@ -83,6 +86,7 @@
   .menu-panel a {
     color: #FFED00; text-decoration: none;
     font-family: 'IBMSelectric', serif;
+    font-style: italic;
     font-size: 22px; font-weight: bold;
     text-shadow: 1px 1px 2px #5B45E0;
     letter-spacing: 0.5px;
@@ -97,12 +101,13 @@
 
   .page {
     position: relative; z-index: 1;
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1000px; margin: 0 auto;
     padding: 18vh 30px 60px; box-sizing: border-box;
   }
 
   .page h1 {
     font-family: 'TaylorGothic', serif;
+    font-style: normal;
     font-weight: normal; font-size: 72px;
     margin: 0 0 40px; line-height: 1;
     text-shadow: 2px 2px 2px #5B45E0;
@@ -117,6 +122,7 @@
   .contact-text p {
     font-size: 20px; font-weight: bold;
     line-height: 1.6;
+    font-style: italic;
     text-shadow: 2px 2px 3px #5B45E0;
     margin: 0 0 22px;
   }
@@ -124,6 +130,12 @@
   .contact-text a {
     color: #FFED00;
     text-decoration: underline;
+  }
+
+  .contact-photo {
+    max-width: 340px;
+    margin-left: auto;
+    margin-top: -40px;
   }
 
   .contact-photo img {
@@ -136,6 +148,7 @@
     align-items: center; gap: 12px;
     padding: 40px 20px 20px;
     font-size: 22px;
+    font-style: italic;
     text-shadow: 1px 1px 2px #5B45E0;
   }
 
@@ -148,6 +161,7 @@
     display: flex; justify-content: space-between;
     align-items: center; gap: 20px;
     font-size: 12px;
+    font-style: italic;
     padding: 20px 20px 30px;
     text-shadow: 1px 1px 2px #5B45E0;
     flex-wrap: wrap;
