@@ -513,7 +513,7 @@
       const phone = '+' + phoneDigits.join('');
       emailEl.textContent = email;
       emailEl.href = 'mailto:' + email;
-      phoneEl.textContent = phone;
+            phoneEl.textContent = '+44 ' + phoneDigits.slice(2,6).join('') + ' ' + phoneDigits.slice(6).join('');
       phoneEl.href = 'tel:' + phone;
     })();
   </script>
