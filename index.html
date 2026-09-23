@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juno Gardens</title>
+
+<style>
+  @font-face {
+    font-family: 'OldLondon';
+    src: url('Old-London.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'IBMSelectric';
+    src: url('IBM-Selectric-Light-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'IBMSelectric';
+    src: url('IBM-Selectric-Light-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #CCCCFF;
+  }
+
+  body {
+    font-family: 'IBMSelectric', serif;
+    color: #FFED00;
+  }
+
+  .menu-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    font-size: 32px;
+    color: #FFED00;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    font-family: 'IBMSelectric', serif;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .site-title {
+    font-family: 'OldLondon', serif;
+    font-size: 96px;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  .symbol {
+    height: 96px;
+    width: auto;
+    display: block;
+  }
+
+  .subtitle {
+    font-size: 22px;
+    margin-top: 32px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 700px) {
+    .site-title { font-size: 48px; }
+    .symbol { height: 48px; }
+    .subtitle { font-size: 16px; margin-top: 20px; }
+    .menu-btn { font-size: 28px; top: 18px; left: 18px; }
+  }
+</style>
+</head>
+
+<body>
+
+  <button class="menu-btn" aria-label="Menu">☰</button>
+
+  <div class="hero">
+    <div class="title-row">
+      <h1 class="site-title">Juno Gardens</h1>
+      <img src="Dumpling-Venus-Symbol-Yellow.png" alt="Juno Gardens symbol" class="symbol">
+    </div>
+    <p class="subtitle">Sustainable Garden Design &amp; Maintenance in London</p>
+  </div>
+
+</body>
+</html>
