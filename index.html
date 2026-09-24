@@ -498,7 +498,8 @@
     });
 
     window.addEventListener('resize', () => { index = 0; update(); });
-    window.addEventListener('load', update);
+    window.addEventListener('load', () => setTimeout(update, 300));
+    items.forEach(i => i.querySelector('img').addEventListener('load', update));
 
     const grid = document.getElementById('grid');
     const gridImgs = Array.from(grid.querySelectorAll('.img-wrap'));
